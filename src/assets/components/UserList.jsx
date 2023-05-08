@@ -104,7 +104,7 @@ export default function UserList() {
       >
         <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
           <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-            <UserForm cerrar={handleClose}/>
+            <UserForm cerrar={handleClose} />
           </Paper>
         </Container>
       </Modal>

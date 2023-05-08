@@ -1,8 +1,7 @@
 import React from 'react';
-import { useEffect } from 'react';
 
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
+
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -13,7 +12,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from '@mui/material/Modal';
 import { Paper } from '@mui/material';
 
-import { useState } from 'react';
 import { deleteUser } from '../../services/deleteUser';
 import UpdateUser from './UpdateForm';
 
@@ -66,7 +64,7 @@ export const UserCard = ({ index, data }) => {
       >
         <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
           <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-            <UpdateUser cerrar={handleClose} index={index}/>
+            <UpdateUser cerrar={handleClose} index={index} />
           </Paper>
         </Container>
       </Modal>

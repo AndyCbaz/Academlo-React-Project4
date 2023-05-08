@@ -23,7 +23,6 @@ const UpdateUser = ({ cerrar, index }) => {
       form.password,
       form.birthday,
       index,
-
     ).then((data) => {
       console.log(data);
     });

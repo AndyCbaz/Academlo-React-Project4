@@ -29,8 +29,6 @@ const NewUser = ({ cerrar }) => {
     cerrar();
   };
 
-  
-
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit}>
