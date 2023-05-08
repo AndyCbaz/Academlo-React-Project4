@@ -10,26 +10,26 @@ import SaveIcon from '@mui/icons-material/Save';
 
 import useForm from '../../hooks/useForm';
 import { initialValues } from '../../helpers/formProps';
-import { createUser } from '../../services/createUsers';
+import { updateUser } from '../../services/updateUser';
 
-const NewUser = ({ cerrar }) => {
+const UpdateUser = ({ cerrar, index }) => {
   const { form, handleChange, handleSubmit } = useForm(initialValues);
 
-  const handleCreateUser = () => {
-    createUser(
+  const handleUpdateUser = () => {
+    updateUser(
       form.first_name,
       form.last_name,
       form.email,
       form.password,
       form.birthday,
+      index,
+
     ).then((data) => {
       console.log(data);
     });
 
     cerrar();
   };
-
-  
 
   return (
     <React.Fragment>
@@ -46,7 +46,7 @@ const NewUser = ({ cerrar }) => {
             }}
           >
             <Typography variant="h6" sx={{ textAlign: 'center' }}>
-              Agregar Usuario
+              Editar Usuario
             </Typography>
             <Divider />
             {/* INPUT NOMBRE */}
@@ -176,7 +176,7 @@ const NewUser = ({ cerrar }) => {
             <Button
               variant="outlined"
               startIcon={<SaveIcon />}
-              onClick={handleCreateUser}
+              onClick={handleUpdateUser}
             >
               Guardar
             </Button>
@@ -187,4 +187,4 @@ const NewUser = ({ cerrar }) => {
   );
 };
 
-export default NewUser;
+export default UpdateUser;

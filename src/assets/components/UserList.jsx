@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
+import Toast from '../components/Toast';
 
 import CssBaseline from '@mui/material/CssBaseline';
 import Stack from '@mui/material/Stack';
@@ -17,6 +18,8 @@ import { UserCard } from './UserCard';
 import Modal from '@mui/material/Modal';
 import UserForm from './UserForm';
 import { Paper } from '@mui/material';
+import { useEffect } from 'react';
+import { getAllUsers } from '../../services/getAllUsers';
 
 const theme = createTheme();
 
@@ -25,19 +28,28 @@ export default function UserList() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const [data, setData] = useState([]);
+
+  // const data = {
+  //   first_name: 'Andres',
+  //   last_name: 'Bonilla',
+  //   email: 'andy.cbr.ab@gmail.com',
+  //   password: '123456',
+  //   birthday: '1996-12-25',
+  // };
+
   //Declaro constantes reactivas para los datos del form
-  const initialData = {
-    name: '',
-    lastname: '',
-    email: '',
-    password: '',
-    birthday: '',
-  };
-  const [data, setData] = useState(initialData);
+
+  useEffect(() => {
+    getAllUsers().then((data) => {
+      setData(data);
+    });
+  }, [data]);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <Toast />
       <AppBar position="relative" color="secondary">
         <Toolbar>
           <AccountCircleIcon sx={{ mr: 1 }} />
@@ -66,7 +78,9 @@ export default function UserList() {
             </Typography>
             <Stack sx={{ pt: 4 }} direction="row" justifyContent="end">
               <Button
-                onClick={handleOpen}
+                onClick={() => {
+                  handleOpen();
+                }}
                 variant="contained"
                 color="secondary"
                 startIcon={<GroupAddIcon />}
@@ -76,7 +90,11 @@ export default function UserList() {
             </Stack>
           </Container>
         </Box>
-        <UserCard />
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', px: 4, gap: 3 }}>
+          {data.map((data) => (
+            <UserCard key={data.id} index={data.id} data={data} />
+          ))}
+        </Box>
       </main>
       <Modal
         open={open}
@@ -86,7 +104,7 @@ export default function UserList() {
       >
         <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
           <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-            <UserForm handleclose={handleClose} setdata={setData} />
+            <UserForm cerrar={handleClose}/>
           </Paper>
         </Container>
       </Modal>
