@@ -9,8 +9,9 @@ import { Button } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
 
 import useForm from '../../hooks/useForm';
-import { initialValues } from '../../helpers/formProps';
+
 import { createUser } from '../../services/createUsers';
+import { initialValues } from '../../helpers/formProps';
 
 const NewUser = ({ cerrar }) => {
   const { form, handleChange, handleSubmit } = useForm(initialValues);
